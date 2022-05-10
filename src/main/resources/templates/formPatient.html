@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                    layout:decorate="template1">
+<head>
+        <meta charset="UTF-8">
+        <title>Ajouter Patient</title>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div layout:fragment="content1">
+<div class="container" style="padding-top: 3cm;">
+        <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 align-items-center">
+                        <div class="card">
+                                <div class="card-header">Formulaire du Patient</div>
+                                <div class="card-body">
+                                        <form method="post" th:action="@{save(page=${page}, keyword=${keyword})}">
+                                                <div class="mb-3">
+                                                        <label for="id" class="form-label">ID</label>
+                                                        <input type="text" class="form-control" id="id" readonly="readonly" name="id" th:value="${patient.id}">
+                                                </div>
+                                                <div class="mb-3">
+                                                        <label for="nom_id" class="form-label">Nom</label>
+                                                        <input type="text" class="form-control" id="nom_id" name="nom" th:value="${patient.nom}">
+                                                </div>
+                                                <div class="mb-3">
+                                                        <label for="dateNaissance_id" class="form-label">Date de Naissance</label>
+                                                        <input type="date" class="form-control" id="dateNaissance_id" name="dateNaissance" th:value="${patient.dateNaissance}">
+                                                </div>
+                                                <div>
+                                                        <label for="malade_id" class="form-label">Malade ?</label>
+                                                        <input type="checkbox" id="malade_id" name="malade" th:checked="${patient.malde}">
+                                                </div><br>
+                                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        </form>
+                                </div>
+                        </div>
+                </div>
+                <div class="col-2"></div>
+        </div>
+</div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/js/boostrap.min.js}"></script>
+</body>
+</html>

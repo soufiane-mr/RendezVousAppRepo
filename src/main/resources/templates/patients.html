@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1">
+<head>
+<meta charset="UTF-8">
+<title>Patients</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div layout:fragment="content1">
+<div class="container" style="padding-top: 2cm;">
+ <div class="row">
+  	<div class="col-12 align-items-center">
+  	    <div class="card">
+ 	<div class="card-header">Liste des Patients</div>
+ 	<div class="card-body">
+		<form method="get" th:action="@{patients}">
+			<label for="keyword">Mot Clé</label>
+			<input   id="keyword" type="text" name="keyword" th:value="${keyword}">
+			<button class="btn btn-primary" type="submit">Chercher</button>
+		</form>
+		<br>
+ 		<table class="table table-striped ">
+			<thead>
+					<tr>
+						<th>
+						ID
+						</th>
+						<th>
+						NOM
+						</th>
+						<th>
+						DATE DE NAISSANCE
+						</th>
+						<th>
+						ACTION
+						</th>
+					</tr>
+			</thead>
+			<tbody>
+				<tr th:each="p:${patients}">
+					<td th:text="${p.id}"></td>
+					<td th:text="${p.nom}"></td>
+					<td th:text="${p.dateNaissance}"></td>
+					<td><a class="btn btn-danger"
+								th:href="@{supprimer(id=${p.id}, keyword=${keyword}, page=${currentPage})}">Suprimer</a>
+					</td>
+					<td><a class="btn btn-success"
+					    th:href="@{modifier(id=${p.id}, keyword=${keyword}, page=${currentPage})}">Modifier</a> </td>
+				</tr>
+			</tbody>
+		</table>
+		<ul class="nav nav-pills">
+			<li th:each="page,status:${pages}">
+				<a th:class="${status.index==currentPage?'btn btn-secondary ms-1':'btn btn-outline-secondary ms-1'}"
+				   th:text="${status.index}"
+				   th:href="@{patients(page=${status.index}, keyword=${keyword})}"></a>
+			</li>
+		</ul>
+ 	</div>
+</div>
+  	</div>
+ </div>
+</div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/boostrap.min.js}"></script>
+</body>
+</html>
