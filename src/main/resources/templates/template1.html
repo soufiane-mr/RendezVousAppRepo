@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,17 +10,17 @@
     <script type="text/javascript" th:href="@{/js/bootstrap.bundle.js}"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d1e7dd;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- Navbar content -->
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{patients}">RendezVous</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">PATIENTS</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{patients}">PATIENTS</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">MEDECINS</a>
@@ -28,10 +29,23 @@
                     <a class="nav-link" href="#">RENDEZ-VOUS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">CONSULTATIONS</a>
+                    <a class="nav-link " href="#">CONSULTATIONS</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" >
+                        <span sec:authentication="name"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
+
     </div>
 </nav>
 
